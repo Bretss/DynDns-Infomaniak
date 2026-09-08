@@ -13,8 +13,14 @@ https://www.infomaniak.com/fr/support/faq/2357/gerer-une-ip-dynamique-avec-dyndn
 
 ## Quick Start
 
-### 1. Create `ddclient.conf`
-Create a configuration file in your working directory:
+### 0. Retrieve the repo on your host : 
+
+```bash
+git clone https://github.com/Bretss/DynDns-Infomaniak
+```
+
+### 1. Setup the `ddclient.conf` file
+Push your credentials and your domain to the configuration file in the repo directory:
 
 ```ini
 daemon=300                          # Check every 300s (5 minutes)
@@ -49,7 +55,7 @@ docker build -t dyndns-infomaniak .
 Or use the pre-built image : 
 
 ```bash
-docker pull ghcr.io/bretss/dyndns-infomaniak:latest
+docker pull ghcr.io/bretss/dyndns-infomaniak:latest && docker run -d --name alpine-dyndns-infomaniak --restart unless-stopped -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf ghcr.io/bretss/dyndns-infomaniak:latest
 ```
 
 Then : 
@@ -80,7 +86,7 @@ docker build --no-cache -t dyndns-infomaniak . && docker stop alpine-dyndns-info
 OR 
 
 ```bash
-docker pull ghcr.io/bretss/dyndns-infomaniak:latest && docker stop alpine-dyndns-infomaniak && docker run -d --name alpine-dyndns-infomaniak --restart unless-stopped -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf dyndns-infomaniak
+docker pull ghcr.io/bretss/dyndns-infomaniak:latest && docker stop alpine-dyndns-infomaniak && docker rm -f alpine-dyndns-infomaniak && docker run -d --name alpine-dyndns-infomaniak --restart unless-stopped -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf ghcr.io/bretss/dyndns-infomaniak:latest
 ```
 
 You can then create a bash script to automate the updating process.
