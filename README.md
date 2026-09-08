@@ -43,19 +43,28 @@ sudo chmod 600 ddclient.conf
 
 ```bash
 # Build the image
-docker build -t ddclient-infomaniak .
+docker build -t dyndns-infomaniak .
+```
 
+Or use the pre-built image : 
+
+```bash
+docker pull ghcr.io/bretss/dyndns-infomaniak:latest
+```
+
+Then : 
+```
 # Run the container
 docker run -d \
-  --name alpine-ddclient-infomaniak \
+  --name alpine-dyndns-infomaniak \
   --restart unless-stopped \
   -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf \
-  ddclient-infomaniak
+  dyndns-infomaniak
 ```
 
 ### 3. Check Logs
 ```bash
-docker logs -f ddclient
+docker logs -f alpine-dyndns-infomaniak
 ```
 
 ---
@@ -65,7 +74,7 @@ docker logs -f ddclient
 ### 1. To update the ddclient docker : 
 
 ```bash
-docker build --no-cache -t ddclient-infomaniak . && docker stop alpine-ddclient-infomaniak && docker rm -f ddclient-infomaniak && docker run -d --name alpine-ddclient-infomaniak --restart unless-stopped -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf ddclient-infomaniak
+docker build --no-cache -t dyndns-infomaniak . && docker stop alpine-dyndns-infomaniak && docker rm -f dyndns-infomaniak && docker run -d --name alpine-dyndns-infomaniak --restart unless-stopped -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf dyndns-infomaniak
 ```
 
 You can then create a bash script to automate the updating process.
