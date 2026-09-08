@@ -47,9 +47,9 @@ docker build -t ddclient-infomaniak .
 
 # Run the container
 docker run -d \
-  --name ddclient \
+  --name alpine-ddclient-infomaniak \
   --restart unless-stopped \
-  -v \$(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf \
+  -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf \
   ddclient-infomaniak
 ```
 
@@ -65,7 +65,7 @@ docker logs -f ddclient
 ### 1. To update the ddclient docker : 
 
 ```bash
-docker build --no-cache -t ddclient-infomaniak . && docker stop ddclient-infomaniak && docker rm -f ddclient && docker run -d --name ddclient --restart unless-stopped -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf ddclient-infomaniak
+docker build --no-cache -t ddclient-infomaniak . && docker stop alpine-ddclient-infomaniak && docker rm -f ddclient-infomaniak && docker run -d --name alpine-ddclient-infomaniak --restart unless-stopped -v $(pwd)/ddclient.conf:/etc/ddclient/ddclient.conf ddclient-infomaniak
 ```
 
 You can then create a bash script to automate the updating process.
